@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+nltk = "*"
+tensorflow = "*"
+numpy = "*"
+pandas = "*"
+speechrecognition = "*"
+pyaudio = {path = "./PyAudio-0.2.11-cp39-cp39-win_amd64.whl"}
+gtts = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.9"

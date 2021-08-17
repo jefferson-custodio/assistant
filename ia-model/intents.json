@@ -1,0 +1,52 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["oi", "olá, tudo bem?", "bom dia", "boa tarde", "boa noite"],
+      "responses": ["Olá, como posso te ajudar hoje?"],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Até mais", "falou", "tchau", "xau"],
+      "responses": ["Até a próxima!"],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Obrigado", "Valeu"],
+      "responses": ["Por nada"],
+      "context": [""]
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [],
+      "responses": [
+        "Desculpe, não entendi!",
+        "Poderia repetir por favor?",
+        "Ooops, Acho que ainda não aprendi a responder isso!"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "whogivesmoremoney",
+      "patterns": [
+        "aumenta o salário",
+        "promove",
+        "da mais dinheiro",
+        "aumentar salário",
+        "dar aumento"
+      ],
+      "responses": ["O fundador da fasters, Bruno Barbosa!"],
+      "context": [""]
+    },
+    {
+      "tag": "whois",
+      "patterns": ["Quem é você ?", "você"],
+      "responses": [
+        "Olá, eu sou um robô criado apartir de pesquisas realizadas pelo meu criador na internet a fim de aprender mais sobre IA."
+      ],
+      "context": [""]
+    }
+  ]
+}
