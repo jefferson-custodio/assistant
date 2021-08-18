@@ -11,8 +11,10 @@ import pandas as pd
 import random
 from tensorflow.keras.models import model_from_json
 
+path = 'D:\Projetos\Assistant/ia_model/'
+
 # Opening JSON file
-f = open('intents.json',)
+f = open(f'{path}intents.json',)
   
 # returns JSON object as 
 # a dictionary
@@ -44,12 +46,12 @@ classes = sorted(list(set(classes)))
 
 
 
-model_file = open('model.json', 'r')
+model_file = open(f'{path}model.json', 'r')
 network_structure = model_file.read()
 model_file.close()
 
 model = model_from_json(network_structure)
-model.load_weights('model.h5')
+model.load_weights(f'{path}model.h5')
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - split words into array
@@ -114,15 +116,16 @@ def get_answer(sentence):
     for i in list_of_intents: 
         if i["tag"] == tag:
             result = random.choice(i["responses"])
+            actions = i["actions"]
             break
 
-    return result
+    return result, tag, actions
 
 
 # running the chatbot
 # while True:
-message = input("\033[96m Diga: ")
-answer = get_answer(message)
-print('\033[92m -> Resposta: ' + answer + '\033[96m')
+# message = input("\033[96m Diga: ")
+# answer = get_answer(message)
+# print('\033[92m -> Resposta: ' + answer + '\033[96m')
 
 # %%

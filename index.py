@@ -1,59 +1,31 @@
 #%%
-import speech_recognition as sr
-from gtts import gTTS
-from playsound import playsound
+from ia_model.index import get_answer
+from utils import ouvir_microfone, play_audio
+from actions import open_work_programs, turn_off
 
-#Função para ouvir e reconhecer a fala
+def listen(awake=False):
+    message = ouvir_microfone(awake)
 
-def ouvir_microfone():
-    #Habilita o microfone do usuário
-    microfone = sr.Recognizer()
+    if message != False:
+        result, tag, actions = get_answer(message)
+        print(result)
 
-    #usando o microfone
-    with sr.Microphone() as source:
+        if awake == False and tag == 'greeting':
+            play_audio(f'{tag}.mp3')
+            awake = True
+        else:
+            play_audio(f'{tag}.mp3')
+            if len(actions) > 0:
+                if actions[0] == 'open_work_programs':
+                    open_work_programs()
+                    awake == False
+                elif actions[0] == 'turn_off':
+                    turn_off()
+                    awake == False
+    elif awake == True:
+        play_audio('audios/noanswer.mp3')
 
-        #Chama um algoritmo de reducao de ruidos no som
-        microfone.adjust_for_ambient_noise(source)
+    return listen(awake)
 
-        #Frase para o usuario dizer algo
-        print("Diga alguma coisa: ")
-
-        #Armazena o que foi dito numa variavel
-        audio = microfone.listen(source, phrase_time_limit=3)
-
-    try:
-
-        #Passa a variável para o algoritmo reconhecedor de padroes
-        frase = microfone.recognize_google(audio,language='pt-BR')
-
-        #Retorna a frase pronunciada
-        print("Você disse: " + frase)
-
-    #Se nao reconheceu o padrao de fala, exibe a mensagem
-
-    except:
-       frase = False
-       print("Não entendi")
-
-    return frase
-
-#Funcao responsavel por falar 
-
-def cria_audio(audio):
-
-    tts = gTTS(audio,lang='pt-br')
-
-    #Salva o arquivo de audio
-
-    tts.save('hello.mp3')
-
-    print("Estou aprendendo o que você disse...")
-
-    #Da play ao audio
-
-    playsound('hello.mp3')
-
-frase = ouvir_microfone()
-cria_audio(frase)
-
+listen()
 # %%

@@ -5,7 +5,7 @@ from playsound import playsound
 
 #Função para ouvir e reconhecer a fala
 
-def ouvir_microfone():
+def ouvir_microfone(playnotification):
     #Habilita o microfone do usuário
     microfone = sr.Recognizer()
 
@@ -17,6 +17,8 @@ def ouvir_microfone():
 
         #Frase para o usuario dizer algo
         print("Diga alguma coisa: ")
+        if playnotification: 
+            playsound('notification-alert.mp3')
 
         #Armazena o que foi dito numa variavel
         audio = microfone.listen(source, phrase_time_limit=3)
@@ -32,8 +34,8 @@ def ouvir_microfone():
     #Se nao reconheceu o padrao de fala, exibe a mensagem
 
     except:
-       frase = False
-       print("Não entendi")
+        print("Não entendi...")
+        frase = False
 
     return frase
 
